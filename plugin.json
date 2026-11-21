@@ -1,0 +1,26 @@
+{
+  "$schema": "https://raw.githubusercontent.com/songloft-org/plugin-toolchain/main/schemas/plugin.schema.json",
+  "name": "OSU音乐",
+  "version": "2026.11.21.9",
+  "description": "搜索 osu! 谱面，下载 osz 自动解压只留歌曲、导入曲库与歌单，支持歌手/歌名命名、统一转 MP3。Cookie 由使用者自行填写，不内置任何账号。",
+  "author": "514475844",
+  "homepage": "https://github.com/514475844/songloft-plugin-osu-music",
+  "license": "Apache-2.0",
+  "icon": "icon.svg",
+  "entryPath": "osu-music",
+  "main": "main.js",
+  "minHostVersion": "2.0.0",
+  "permissions": [
+    "storage",
+    "command",
+    "fs",
+    "playlists.read",
+    "songs.read",
+    "songs.write",
+    "inter-plugin"
+  ],
+  "updateUrl": "https://raw.githubusercontent.com/514475844/songloft-plugin-osu-music/main/plugin.json",
+  "download_url": "https://github.com/514475844/songloft-plugin-osu-music/releases/download/v2026.11.21.9/osu-music.jsplugin.zip",
+  "entryHash": "eb70267cce2bd43f9f7ad7e9eba7a8e1ab138f9009e561429159ea27288d74f1",
+  "zipHash": "b122c4661ed5370b3423b7d6344d9fea1cc50d0f4828caed7885fcd2a47fccc0"
+}

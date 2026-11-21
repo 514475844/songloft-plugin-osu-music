@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OSU音乐</title>
+  <link rel="stylesheet" href="static/css/style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand"><span class="dot"></span> OSU音乐</div>
+      <div class="topbar-right"><span id="account-mini" class="account-mini">未登录</span></div>
+    </header>
+
+    <nav class="tabs">
+      <button class="tab active" data-tab="search">找歌 / 导入</button>
+      <button class="tab" data-tab="status">状态</button>
+      <button class="tab" data-tab="account">账号</button>
+      <button class="tab" data-tab="settings">设置</button>
+    </nav>
+
+    <!-- 找歌 + 导入（合并） -->
+    <section id="tab-search" class="tab-panel active">
+      <div class="card">
+        <div class="search-row">
+          <input id="search-input" type="text" placeholder="搜索歌曲 / 歌手，或粘贴 osu! 链接、谱面 ID" />
+          <button id="search-btn" class="btn btn-primary">搜索</button>
+        </div>
+        <div id="search-hint" class="hint">输入关键词搜谱面，或直接粘贴 beatmapsets 链接 / 谱面 ID 定位单曲。搜索无需登录。</div>
+      </div>
+      <div id="search-results" class="list"></div>
+      <div id="search-more" class="center" style="display:none">
+        <button id="search-more-btn" class="btn">加载更多</button>
+      </div>
+      <div id="search-status" class="center muted" style="display:none"></div>
+
+      <!-- 导入选项：选中某首歌后显示 -->
+      <div id="import-panel" class="card" style="display:none">
+        <div class="card-title">导入到曲库</div>
+        <div id="import-preview" class="preview"></div>
+        <label class="field"><span>目标歌单</span>
+          <select id="import-playlist-select"><option value="">不加入歌单</option></select>
+        </label>
+        <label class="field"><span>或新建歌单</span>
+          <input id="import-playlist-name" type="text" placeholder="留空则不新建" />
+        </label>
+        <label class="chk"><input type="checkbox" id="import-mp3" /> 统一转成 MP3（320k，方便车机 / 音箱播放）</label>
+        <label class="chk"><input type="checkbox" id="import-only" /> 只解压，不导入曲库</label>
+        <button id="import-go" class="btn btn-primary block">下载并导入</button>
+        <div id="import-status" class="hint" style="display:none"></div>
+      </div>
+    </section>
+
+    <!-- 状态 -->
+    <section id="tab-status" class="tab-panel">
+      <div class="card">
+        <div class="card-title">最近导入</div>
+        <div id="status-log" class="hint">还没有导入记录。</div>
+      </div>
+    </section>
+
+    <!-- 账号 -->
+    <section id="tab-account" class="tab-panel">
+      <div class="card">
+        <div class="card-title">osu! Cookie</div>
+        <div class="hint">
+          搜索不需要登录；下载歌曲需要 Cookie。<br />
+          在浏览器登录 osu.ppy.sh 后，按 F12 → 网络/Network → 随便点一个 osu.ppy.sh 请求 → 请求头里的 Cookie，复制整段粘贴到下面。
+        </div>
+        <textarea id="cookie-input" rows="4" placeholder="粘贴 Cookie，例如 osu_session=..."></textarea>
+        <div class="btn-row">
+          <button id="cookie-save" class="btn btn-primary">保存 Cookie</button>
+          <button id="cookie-clear" class="btn">清除</button>
+        </div>
+        <div id="account-status" class="hint"></div>
+      </div>
+    </section>
+
+    <!-- 设置 -->
+    <section id="tab-settings" class="tab-panel">
+      <div class="card">
+        <label class="field"><span>落盘文件名格式</span>
+          <select id="set-name-order">
+            <option value="artist-title">歌手 - 歌名</option>
+            <option value="title-artist">歌名 - 歌手</option>
+          </select>
+        </label>
+        <div class="hint" style="margin:-6px 0 10px">下载到音乐库「OSU音乐」文件夹的文件，统一按此格式命名，例如「Ryu☆ - KOROBUSHKA.mp3」。</div>
+        <label class="chk"><input type="checkbox" id="set-embed" /> 下载时嵌入元数据</label>
+        <label class="chk"><input type="checkbox" id="set-keepall" /> 保留包内所有音频（默认去重只留一首）</label>
+        <label class="chk"><input type="checkbox" id="set-mp3" /> 默认统一转成 MP3</label>
+        <button id="set-save" class="btn btn-primary block">保存设置</button>
+        <div id="set-status" class="hint" style="display:none"></div>
+      </div>
+    </section>
+
+    <div id="toast" class="toast" style="display:none"></div>
+  </div>
+  <script src="static/js/app.js"></script>
+</body>
+</html>
